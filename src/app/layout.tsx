@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Tinos } from "next/font/google";
-import Header from "@/components/Header";
+import Nav from "@/components/Nav";
 import "./globals.css";
 
 const tinos = Tinos({
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={tinos.variable}>
       <body className="text-[1.12rem] leading-[1.6]">
         <div className="flex min-h-dvh w-full flex-col px-6 py-10 sm:py-12">
-          <Header />
+          <Nav />
           <main className="flex flex-1 flex-col pt-14">{children}</main>
         </div>
       </body>
