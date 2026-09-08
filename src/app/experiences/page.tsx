@@ -6,7 +6,7 @@ export const metadata = { title: "Experiences — Doyoon (Daniel) Kim" };
 
 export default function Experiences() {
   return (
-    <>
+    <div className="mx-auto w-full max-w-[42rem]">
       <h1 className="text-[1.7rem]">Experiences</h1>
       <div className="mt-8">
         {experience.entries.map((entry) => (
@@ -20,6 +20,6 @@ export default function Experiences() {
           </Disclosure>
         ))}
       </div>
-    </>
+    </div>
   );
 }

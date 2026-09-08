@@ -10,7 +10,7 @@ const INTERESTS = [
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center pb-20 text-center">
-      <h1 className="text-[clamp(2.6rem,7.5vw,4.6rem)] leading-[1.1]">
+      <h1 className="whitespace-nowrap text-[clamp(1.75rem,6.2vw,5rem)] leading-[1.1]">
         Doyoon (Daniel) Kim
       </h1>
 

@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={tinos.variable}>
       <body className="text-[1.12rem] leading-[1.6]">
-        <div className="mx-auto flex min-h-dvh max-w-[42rem] flex-col px-6 py-10 sm:py-12">
+        <div className="flex min-h-dvh w-full flex-col px-6 py-10 sm:py-12">
           <Header />
           <main className="flex flex-1 flex-col pt-14">{children}</main>
         </div>
