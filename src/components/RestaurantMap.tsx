@@ -25,14 +25,13 @@ export default function RestaurantMap({ places }: { places: Restaurant[] }) {
         attributionControl: true,
       }).setView([DEFAULT_VIEW.lat, DEFAULT_VIEW.lng], DEFAULT_VIEW.zoom);
 
-      L.tileLayer(
-        "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-        {
-          maxZoom: 19,
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        },
-      ).addTo(map);
+      // Plain OpenStreetMap tiles: no API key, unlike CARTO and Stadia, which
+      // now watermark unkeyed requests. Colour is stripped in CSS anyway.
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
 
       const markers = places.map((place) => {
         const marker = L.circleMarker([place.lat, place.lng], {
@@ -69,7 +68,7 @@ export default function RestaurantMap({ places }: { places: Restaurant[] }) {
       ref={ref}
       role="application"
       aria-label="Map of restaurants visited"
-      className="h-[26rem] w-full border border-rule bg-paper"
+      className="h-[24rem] w-full border border-rule bg-paper sm:h-[30rem]"
     />
   );
 }

@@ -24,7 +24,8 @@ export default function Food() {
         redrawn here.
       </p>
 
-      <div className="mt-9">
+      {/* The plate is the one thing allowed out of the text measure. */}
+      <div className="mt-9 w-[min(54rem,calc(100vw-3rem))] sm:w-[min(54rem,calc(100vw-9vw-2rem))]">
         <RestaurantMap places={restaurants} />
       </div>
 

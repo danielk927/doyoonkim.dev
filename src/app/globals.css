@@ -70,7 +70,9 @@ summary:focus-visible {
 }
 
 .leaflet-tile-pane {
-  filter: sepia(0.42) saturate(0.72) brightness(1.03) contrast(0.94);
+  /* Desaturate first, then tint: OSM's greens and yellows would otherwise
+     fight the paper. The result reads as one ink on one stock. */
+  filter: grayscale(1) sepia(0.46) saturate(0.9) brightness(0.99) contrast(1.04);
 }
 
 .leaflet-control-attribution {
