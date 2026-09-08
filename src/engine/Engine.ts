@@ -15,6 +15,8 @@ const MAX_FRAME_MS = 250;
 export interface EngineOptions {
   onPrompt?: (key: string | null) => void;
   onOpen?: (key: string) => void;
+  /** Fired when the player lands on a new tile. Drives the minimap. */
+  onMove?: (x: number, y: number) => void;
   /** Landmark key -> short label drawn on the sign above the building. */
   signs?: Record<string, string>;
   signFont?: string;
@@ -70,6 +72,7 @@ export class Engine {
   }
 
   start() {
+    this.opts.onMove?.(this.move.x, this.move.y);
     this.input.attach(window);
     this.last = performance.now();
     this.loop(this.last);
@@ -111,7 +114,10 @@ export class Engine {
           (x, y) => x >= 0 && y >= 0 && x < this.map.width && y < this.map.height
             && !this.map.solid[y][x],
         );
-        if (before !== null && this.move.progress === null) this.stepCount++;
+        if (before !== null && this.move.progress === null) {
+          this.stepCount++;
+          this.opts.onMove?.(this.move.x, this.move.y);
+        }
       }
       this.updatePrompt();
     }

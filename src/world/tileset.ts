@@ -51,6 +51,26 @@ const T = {
 } as const;
 
 export const WATER_TILES = new Set<number>([T.water, T.waterAlt]);
+const ROAD_TILES = new Set<number>([T.road, T.roadLine, T.crosswalk, T.manhole]);
+
+/** Palette for the minimap, which reads categories rather than tiles. */
+export const MINIMAP = {
+  water: "#2f5f86",
+  road: "#4a4d52",
+  building: "#9aa2a8",
+  grass: "#5c8f63",
+  ground: "#d2d8d1",
+  landmark: "#d94f3d",
+  player: "#f8f4e6",
+} as const;
+
+export function minimapColor(ground: number, solid: boolean): string {
+  if (WATER_TILES.has(ground)) return MINIMAP.water;
+  if (solid) return MINIMAP.building;
+  if (ROAD_TILES.has(ground)) return MINIMAP.road;
+  if (ground === T.grass) return MINIMAP.grass;
+  return MINIMAP.ground;
+}
 export const FOAM = { N: T.foamN, E: T.foamE, S: T.foamS, W: T.foamW };
 
 const walk = (ground: number): TileDef => ({ ground });

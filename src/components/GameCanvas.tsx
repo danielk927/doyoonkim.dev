@@ -4,7 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Engine, loadAssets } from "@/engine/Engine";
 import { SECTIONS, SECTION_BY_KEY } from "@/content";
 import { HONG_KONG } from "@/world/map";
+import Minimap from "./Minimap";
 import Panel from "./Panel";
+import type { ParsedMap } from "@/engine/types";
 
 const SIGNS = Object.fromEntries(SECTIONS.map((s) => [s.key, s.sign]));
 
@@ -23,6 +25,8 @@ export default function GameCanvas() {
   // with the effect below, which strips the param while openKey is still null.
   const deepLink = useRef<string | null>(readPanelParam());
   const [openKey, setOpenKey] = useState<string | null>(deepLink.current);
+  const [worldMap, setWorldMap] = useState<ParsedMap | null>(null);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     let engine: Engine | null = null;
@@ -38,10 +42,12 @@ export default function GameCanvas() {
         engine = new Engine(canvasRef.current, assets, HONG_KONG, {
           onPrompt: setPrompt,
           onOpen: setOpenKey,
+          onMove: (x, y) => setPos({ x, y }),
           signs: SIGNS,
           signFont: font,
         });
         if (deepLink.current) engine.placeAt(deepLink.current);
+        setWorldMap(engine.map);
         engineRef.current = engine;
         if (process.env.NODE_ENV !== "production") {
           (window as unknown as { __engine?: Engine }).__engine = engine;
@@ -111,6 +117,8 @@ export default function GameCanvas() {
       >
         PLAIN TEXT
       </a>
+
+      {worldMap && <Minimap map={worldMap} pos={pos} />}
 
       {section && <Panel section={section} onClose={close} />}
     </div>
