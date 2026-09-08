@@ -1,3 +1,4 @@
+import PopupLink from "@/components/PopupLink";
 import { LINKS } from "@/content";
 
 export default function Home() {
@@ -11,11 +12,11 @@ export default function Home() {
           Doyoon (Daniel) Kim
         </h1>
 
-        <p className="absolute inset-x-0 top-full mt-1 flex justify-center gap-x-4 text-[1.05rem]">
+        <p className="absolute inset-x-0 top-full mt-5 flex justify-center gap-x-5 text-[1.05rem]">
           {LINKS.filter((link) => link.label !== "Email").map((link) => (
-            <a key={link.label} href={link.href} className="underline">
+            <PopupLink key={link.label} href={link.href} className="underline">
               {link.label}
-            </a>
+            </PopupLink>
           ))}
         </p>
       </div>
