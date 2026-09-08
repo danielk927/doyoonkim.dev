@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f8f7f3;
-  --ink: #191917;
-  --muted: #6c6c66;
-  --rule: #dedcd3;
+  --bg: #ffffff;
+  --ink: #000000;
+  --muted: #666660;
+  --rule: #e2e2dc;
 }
 
 @theme inline {
@@ -24,10 +24,6 @@ body {
   /* Real Times where the system has it; Tinos is metrically identical and
      covers everywhere else. */
   font-family: "Times New Roman", var(--font-tinos), Times, serif;
-}
-
-::selection {
-  background: #e6e3d8;
 }
 
 a:focus-visible,
@@ -52,43 +48,4 @@ button:focus-visible {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
-}
-
-/* Map: desaturated and lightly warmed so it sits on the off-white ground
-   instead of glowing against it. */
-.leaflet-container {
-  background: var(--bg);
-  font-family: inherit;
-}
-
-.leaflet-tile-pane {
-  filter: grayscale(1) sepia(0.16) brightness(1.02) contrast(1.02);
-}
-
-.leaflet-control-attribution {
-  background: rgba(248, 247, 243, 0.88) !important;
-  color: var(--muted);
-  font-size: 0.72rem;
-}
-
-.leaflet-control-attribution a {
-  color: var(--muted);
-}
-
-.leaflet-bar a {
-  background: var(--bg);
-  color: var(--ink);
-  border-bottom-color: var(--rule);
-}
-
-.leaflet-bar a:hover {
-  background: #eeece4;
-}
-
-.leaflet-popup-content-wrapper,
-.leaflet-popup-tip {
-  background: var(--bg);
-  color: var(--ink);
-  border-radius: 2px;
-  box-shadow: 0 1px 6px rgba(25, 25, 23, 0.16);
 }
