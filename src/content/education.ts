@@ -2,7 +2,6 @@ import type { Section } from "./types";
 
 export const education: Section = {
   key: "education",
-  sign: "SCHOOL",
   title: "Education",
   entries: [
     {

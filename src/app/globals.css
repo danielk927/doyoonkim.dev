@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* Uncoated book stock, letterpress ink, and the red of manuscript rubrication.
+   No greys: everything is a tint of the ink so the page reads as one printing. */
+:root {
+  --paper: #f2ecdd;
+  --ink: #2b2419;
+  --ink-soft: #6d6350;
+  --ink-faint: #9c917c;
+  --rule: #ddd2ba;
+  --rubric: #7a2e26;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-rubric: var(--rubric);
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  /* Text figures: dates sit on the baseline with ascenders and descenders,
+     the way numerals are set in a printed book. */
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #e4d9be;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 1.5px solid var(--rubric);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* The basemap is warmed toward the paper so it sits on the page as a printed
+   plate rather than a live web map. Only the tiles are filtered; pins keep
+   their true colour. */
+.leaflet-container {
+  background: var(--paper);
+  font-family: inherit;
+}
+
+.leaflet-tile-pane {
+  filter: sepia(0.42) saturate(0.72) brightness(1.03) contrast(0.94);
+}
+
+.leaflet-control-attribution {
+  background: rgba(242, 236, 221, 0.85) !important;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+}
+
+.leaflet-control-attribution a {
+  color: var(--ink-soft);
+}
+
+.leaflet-bar a {
+  background: var(--paper);
+  color: var(--ink);
+  border-bottom-color: var(--rule);
+}
+
+.leaflet-bar a:hover {
+  background: #e9e0cb;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 2px;
+  box-shadow: 0 1px 6px rgba(43, 36, 25, 0.18);
+}

@@ -1,31 +1,38 @@
 import type { Metadata } from "next";
-import { Press_Start_2P } from "next/font/google";
+import { EB_Garamond } from "next/font/google";
+import Folio from "@/components/Folio";
+import Nav from "@/components/Nav";
 import "./globals.css";
 
-const pixel = Press_Start_2P({
-  weight: "400",
+const garamond = EB_Garamond({
   subsets: ["latin"],
-  variable: "--font-pixel",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Doyoon (Daniel) Kim",
   description:
-    "CS and Statistics at the University of Chicago. Walk around Hong Kong to read about my work — or use the plain text version.",
+    "Computer science and statistics at the University of Chicago. Work, projects, restaurants and notes.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={pixel.variable}>
-      <body className="antialiased">
-        <noscript>
-          <p style={{ padding: "1rem" }}>
-            This page is an interactive map that needs JavaScript.{" "}
-            <a href="/plain">Read the plain text version</a>.
-          </p>
-        </noscript>
-        {children}
+    <html lang="en">
+      <body className={`${garamond.className} text-[1.14rem] leading-[1.62]`}>
+        <div className="mx-auto flex min-h-dvh max-w-[40rem] flex-col px-6 py-12 sm:px-8 sm:py-16">
+          <header>
+            <p
+              className="text-[0.95rem] tracking-[0.11em] text-ink-soft"
+              style={{ fontVariantCaps: "small-caps" }}
+            >
+              Doyoon Kim
+            </p>
+            <Nav />
+          </header>
+          <main className="flex-1 pt-11">{children}</main>
+          <Folio />
+        </div>
       </body>
     </html>
   );

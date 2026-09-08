@@ -2,7 +2,6 @@ import type { Section } from "./types";
 
 export const experience: Section = {
   key: "experience",
-  sign: "WORK",
   title: "Experience",
   entries: [
     {

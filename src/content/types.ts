@@ -7,8 +7,6 @@ export interface Entry {
 
 export interface Section {
   key: string;
-  /** Shown on the in-world sign above the building. */
-  sign: string;
   title: string;
   blurb?: string;
   entries: Entry[];

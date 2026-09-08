@@ -2,7 +2,6 @@ import type { Section } from "./types";
 
 export const about: Section = {
   key: "about",
-  sign: "ABOUT",
   title: "Doyoon (Daniel) Kim",
   blurb:
     "CS and Statistics at the University of Chicago. I build things at the seam between machine learning and biology — synthetic training data for microscopy segmentation, computer-vision rehab tools, evaluation pipelines for LLM judges. Previously computational biology at UCLA.",

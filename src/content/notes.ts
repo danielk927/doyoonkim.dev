@@ -1,30 +1,31 @@
-import type { Section } from "./types";
+export interface Note {
+  title: string;
+  when?: string;
+  body: string[];
+}
 
-export const notes: Section = {
-  key: "notes",
-  sign: "NOTES",
-  title: "Misc. Notes",
-  entries: [
-    {
-      title: "Math Directed Reading Program",
-      when: "January 2026 – Present",
-      bullets: [
-        "Authored 2 research papers on bilevel optimisation with SGD and functional scaling laws in feature learning, under the mentorship of William Chang (UCLA Applied Math PhD student); pending at AAAI and AISTATS.",
-      ],
-    },
-    {
-      title: "Skills",
-      bullets: [
-        "Languages — C++, Python, JavaScript, TypeScript, HTML/CSS, R, SQL",
-        "Libraries & frameworks — PyTorch, NumPy, Pandas, Matplotlib, SciPy, MediaPipe, React, FastAPI, Node.js, Three.js",
-        "Tools — Git, Docker, PostgreSQL, GitHub",
-      ],
-    },
-    {
-      title: "Interests",
-      bullets: [
-        "Mahjong, Beli, Kendo, Golf, Cooking and Baking, Running, Watching the NBA, Fashion",
-      ],
-    },
-  ],
-};
+/** Short pieces on whatever is currently interesting. Newest first. */
+export const notes: Note[] = [
+  {
+    title: "Directed reading in optimisation",
+    when: "January 2026 — ",
+    body: [
+      "Two papers with William Chang, a PhD student in applied maths at UCLA: one on bilevel optimisation with stochastic gradient descent, one on functional scaling laws in feature learning. Both are under review, at AAAI and AISTATS respectively.",
+      "The through-line is the same question in two settings — what does the outer problem actually see when the inner one is solved approximately?",
+    ],
+  },
+  {
+    title: "What I work in",
+    body: [
+      "Languages: C++, Python, JavaScript, TypeScript, HTML and CSS, R, SQL.",
+      "Libraries: PyTorch, NumPy, Pandas, Matplotlib, SciPy, MediaPipe, React, FastAPI, Node, Three.js.",
+      "Tools: Git, Docker, PostgreSQL.",
+    ],
+  },
+  {
+    title: "Away from a screen",
+    body: [
+      "Mahjong, kendo, golf, running. Cooking and baking, which is most of why the food page exists. Watching the NBA. Clothes.",
+    ],
+  },
+];
