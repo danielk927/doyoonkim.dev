@@ -6,12 +6,12 @@ export const education: Section = {
   entries: [
     {
       title: "University of Chicago",
-      meta: "B.S. Computer Science, B.S. Statistics — Chicago, IL",
+      meta: "B.S. Computer Science, B.S. Statistics, Chicago, IL",
       when: "Expected June 2029",
     },
     {
       title: "University of California, Los Angeles",
-      meta: "B.S. Computational Biology — Los Angeles, CA",
+      meta: "B.S. Computational Biology, Los Angeles, CA",
       when: "Transferred",
     },
   ],

@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${garamond.className} text-[1.14rem] leading-[1.62]`}>
-        <div className="mx-auto flex min-h-dvh max-w-[40rem] flex-col px-6 py-12 sm:px-8 sm:py-16">
+        <div className="flex min-h-dvh max-w-[40rem] flex-col px-6 py-12 sm:py-16 sm:pl-[7vw] sm:pr-8">
           <header>
             <p
               className="text-[0.95rem] tracking-[0.11em] text-ink-soft"

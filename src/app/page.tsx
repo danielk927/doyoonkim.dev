@@ -1,7 +1,7 @@
 import Disclosure from "@/components/Disclosure";
 import Heading from "@/components/Heading";
 import Prose from "@/components/Prose";
-import { LINKS, education, experience } from "@/content";
+import { LINKS, experience } from "@/content";
 
 export default function Main() {
   return (
@@ -30,19 +30,6 @@ export default function Main() {
             >
               <Prose lines={entry.bullets} />
             </Disclosure>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-12">
-        <Heading>Education</Heading>
-        <div className="space-y-4">
-          {education.entries.map((entry) => (
-            <div key={entry.title}>
-              <p>{entry.title}</p>
-              <p className="italic text-ink-soft">{entry.meta}</p>
-              <p className="text-ink-soft">{entry.when}</p>
-            </div>
           ))}
         </div>
       </section>

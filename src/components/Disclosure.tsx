@@ -50,13 +50,10 @@ export default function Disclosure({
 
       <div
         id={id}
-        className={`grid transition-[grid-template-rows] duration-250 ease-out ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
+        hidden={!open}
+        className={`pl-6 pt-3 ${open ? "motion-safe:animate-[reveal_180ms_ease-out]" : ""}`}
       >
-        <div className="overflow-hidden">
-          <div className="pl-6 pt-3">{children}</div>
-        </div>
+        {children}
       </div>
     </div>
   );

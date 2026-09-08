@@ -6,7 +6,7 @@ export const experience: Section = {
   entries: [
     {
       title: "Undergraduate Research Assistant",
-      meta: "University of California, Los Angeles — Los Angeles, CA",
+      meta: "University of California, Los Angeles",
       when: "January 2026 – Present",
       bullets: [
         "Engineered thermal performance curve models using rTPC (R) and Python (Pandas + SciPy), visualising results with Matplotlib to find the thermal optimum zone in Drosophila; paper pending at Science Advances.",
@@ -15,7 +15,7 @@ export const experience: Section = {
     },
     {
       title: "Engineering Intern",
-      meta: "Anto Biosciences (YC F25) — San Francisco, CA",
+      meta: "Anto Biosciences (YC F25), San Francisco",
       when: "October 2025 – April 2026",
       bullets: [
         "Developed a Python ETL pipeline on the MIT SuperCloud cluster for LLM-as-a-judge evaluation: regex parsing, structured JSON extraction, rating normalisation and validation heuristics across 1,200+ papers.",
@@ -25,7 +25,7 @@ export const experience: Section = {
     },
     {
       title: "Research Assistant",
-      meta: "University of Hong Kong — Hong Kong",
+      meta: "University of Hong Kong",
       when: "July 2024 – August 2024",
       bullets: [
         "Developed Python scripts and SQL databases for data storage, querying and multi-trial performance analysis.",
