@@ -18,7 +18,7 @@ export const about: Section = {
 };
 
 export const LINKS = [
-  { label: "Email", href: "mailto:dkim927@uchicago.edu" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/doyoondanielkim" },
   { label: "GitHub", href: "https://github.com/danielk927" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/doyoondanielkim" },
+  { label: "Email", href: "mailto:dkim927@uchicago.edu" },
 ];
