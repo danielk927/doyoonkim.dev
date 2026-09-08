@@ -47,6 +47,11 @@ export class Engine {
     this.input = new Input(() => this.interact(), () => this.opts.onOpen && void 0);
   }
 
+  /** Inspect movement and input state. Used by tests and dev debugging. */
+  debugState() {
+    return { move: this.move, pressed: this.input.direction, paused: this.paused };
+  }
+
   /** Place the player next to a landmark, for ?panel= deep links. */
   placeAt(key: string) {
     const l = this.map.landmarks.find((m) => m.key === key);

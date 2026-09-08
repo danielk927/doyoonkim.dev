@@ -2,7 +2,7 @@ import type { TileDef } from "@/engine/types";
 
 export const TILE = 16;
 /** Rendered scale. 16px tiles at 2x give the 32px DS-era tile size. */
-export const SCALE = 2;
+export const SCALE = 4;
 /** Columns in public/assets/tileset.png. */
 export const SHEET_COLS = 37;
 
@@ -12,7 +12,7 @@ export const SHEET_COLS = 37;
  */
 const T = {
   pavement: 703,
-  pavementTan: 706,
+  pavementTan: 744,
   road: 713,
   roadLine: 716,
   crosswalk: 826,
@@ -20,12 +20,17 @@ const T = {
   grass: 888,
   glass: 271,
   glassTall: 272,
-  brick: 222,
-  brickAlt: 223,
-  tan: 267,
+  brickPlain: 185,
+  brickWindow: 222,
+  tanPlain: 193,
+  tanWindow: 267,
   roofGrey: 8,
-  awningGreen: 161,
-  awningTeal: 198,
+  umbrellaGreen: 552,
+  umbrellaOrange: 553,
+  doorBrownTop: 982, doorBrownFoot: 1019,
+  doorGreenTop: 985, doorGreenFoot: 1022,
+  doorOrangeTop: 988, doorOrangeFoot: 1025,
+  doorGreyTop: 991, doorGreyFoot: 1028,
   acUnit: 481,
   laundry: 486,
   trafficLight: 518,
@@ -67,28 +72,36 @@ export const LEGEND: Record<string, TileDef> = {
   "~": walk(T.water),
   w: walk(T.waterAlt),
 
-  K: block(T.brick),
-  a: { ground: T.brick, overlay: T.acUnit, solid: true },
-  L: { ground: T.brickAlt, overlay: T.laundry, solid: true },
-  N: block(T.tan),
+  K: block(T.brickPlain),
+  W: block(T.brickWindow),
+  N: block(T.tanPlain),
+  M: block(T.tanWindow),
   B: block(T.glass),
   b: block(T.glassTall),
   G: block(T.roofGrey),
+  a: { ground: T.brickPlain, overlay: T.acUnit, solid: true },
+  L: { ground: T.brickPlain, overlay: T.laundry, solid: true },
 
   l: prop(T.trafficLight),
   h: prop(T.hydrant),
   v: prop(T.vending),
   f: prop(T.fence),
-  s: prop(T.stallFruit),
-  S: prop(T.stallGreens),
+  u: prop(T.umbrellaOrange),
+  U: prop(T.umbrellaGreen),
 
   "@": walk(T.pavement),
 
-  "1": { ground: T.awningTeal, overlay: T.neonRed, solid: true },
-  "2": { ground: T.awningGreen, overlay: T.neonCyan, solid: true },
-  "3": { ground: T.awningTeal, overlay: T.neonGold, solid: true },
-  "4": { ground: T.awningGreen, overlay: T.neonRed, solid: true },
-  "5": { ground: T.awningTeal, overlay: T.neonCyan, solid: true },
+  // Upper halves of the landmark doors. The lower half is the landmark itself.
+  p: block(T.doorBrownTop),
+  q: block(T.doorGreenTop),
+  x: block(T.doorOrangeTop),
+  y: block(T.doorGreyTop),
+
+  "1": block(T.doorGreyFoot),
+  "2": block(T.doorGreenFoot),
+  "3": block(T.doorOrangeFoot),
+  "4": block(T.doorBrownFoot),
+  "5": block(T.doorGreenFoot),
 };
 
 export const LANDMARKS: Record<string, string> = {

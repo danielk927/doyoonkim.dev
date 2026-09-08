@@ -8,13 +8,21 @@ import Panel from "./Panel";
 
 const SIGNS = Object.fromEntries(SECTIONS.map((s) => [s.key, s.sign]));
 
+function readPanelParam(): string | null {
+  const key = new URLSearchParams(window.location.search).get("panel");
+  return key && SECTION_BY_KEY[key] ? key : null;
+}
+
 export default function GameCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const engineRef = useRef<Engine | null>(null);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [prompt, setPrompt] = useState<string | null>(null);
-  const [openKey, setOpenKey] = useState<string | null>(null);
+  // Read ?panel= before first paint. Reading it after the assets load races
+  // with the effect below, which strips the param while openKey is still null.
+  const deepLink = useRef<string | null>(readPanelParam());
+  const [openKey, setOpenKey] = useState<string | null>(deepLink.current);
 
   useEffect(() => {
     let engine: Engine | null = null;
@@ -33,12 +41,11 @@ export default function GameCanvas() {
           signs: SIGNS,
           signFont: font,
         });
-        const deep = new URLSearchParams(window.location.search).get("panel");
-        if (deep && SECTION_BY_KEY[deep]) {
-          engine.placeAt(deep);
-          setOpenKey(deep);
-        }
+        if (deepLink.current) engine.placeAt(deepLink.current);
         engineRef.current = engine;
+        if (process.env.NODE_ENV !== "production") {
+          (window as unknown as { __engine?: Engine }).__engine = engine;
+        }
         engine.start();
         setReady(true);
       })
