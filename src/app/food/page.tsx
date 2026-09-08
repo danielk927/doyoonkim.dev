@@ -19,7 +19,7 @@ export default function Food() {
   return (
     <>
       <h1 className="text-[2.15rem] leading-[1.25]">Food</h1>
-      <p className="mt-5 max-w-[34rem] text-ink-soft">
+      <p className="mt-5 max-w-[34rem] text-muted">
         Everywhere I have eaten and thought about afterwards, kept in Beli and
         redrawn here.
       </p>
@@ -30,7 +30,7 @@ export default function Food() {
       </div>
 
       {restaurants.length === 0 ? (
-        <p className="mt-9 text-ink-soft">
+        <p className="mt-9 text-muted">
           The map is empty while I transcribe the list. Beli has no export, so
           this is going in by hand.
         </p>
@@ -44,7 +44,7 @@ export default function Food() {
                   <li key={place.name} className="flex items-baseline gap-3">
                     <span className="flex-1">{place.name}</span>
                     {place.score !== undefined && (
-                      <span className="text-ink-soft">{place.score}</span>
+                      <span className="text-muted">{place.score}</span>
                     )}
                   </li>
                 ))}

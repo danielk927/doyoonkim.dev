@@ -15,8 +15,8 @@ export default function Projects() {
           return (
             <article key={entry.title}>
               <Heading>{name}</Heading>
-              {subtitle && <p className="-mt-2 mb-3 italic text-ink-soft">{subtitle}</p>}
-              {entry.when && <p className="mb-3 text-ink-soft">{entry.when}</p>}
+              {subtitle && <p className="-mt-2 mb-3 italic text-muted">{subtitle}</p>}
+              {entry.when && <p className="mb-3 text-muted">{entry.when}</p>}
               <Prose lines={entry.bullets} />
             </article>
           );

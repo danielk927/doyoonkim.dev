@@ -12,8 +12,8 @@ export default function Notes() {
         {notes.map((note) => (
           <article key={note.title}>
             <Heading>{note.title}</Heading>
-            {note.when && <p className="-mt-2 mb-3 text-ink-soft">{note.when}</p>}
-            <div className="space-y-3 text-ink/90">
+            {note.when && <p className="-mt-2 mb-3 text-muted">{note.when}</p>}
+            <div className="space-y-3 text-ink">
               {note.body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}

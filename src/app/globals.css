@@ -1,35 +1,39 @@
 @import "tailwindcss";
 
-/* Uncoated book stock, letterpress ink, and the red of manuscript rubrication.
-   No greys: everything is a tint of the ink so the page reads as one printing. */
 :root {
-  --paper: #f2ecdd;
-  --ink: #2b2419;
-  --ink-soft: #6d6350;
-  --ink-faint: #9c917c;
-  --rule: #ddd2ba;
-  --rubric: #7a2e26;
+  --bg: #f8f7f3;
+  --ink: #191917;
+  --muted: #6c6c66;
+  --rule: #dedcd3;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
+  --color-bg: var(--bg);
   --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
   --color-rule: var(--rule);
-  --color-rubric: var(--rubric);
 }
 
 html {
-  background: var(--paper);
+  background: var(--bg);
 }
 
 body {
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
-  /* Text figures: dates sit on the baseline with ascenders and descenders,
-     the way numerals are set in a printed book. */
-  font-variant-numeric: oldstyle-nums proportional-nums;
-  -webkit-font-smoothing: antialiased;
+  /* Real Times where the system has it; Tinos is metrically identical and
+     covers everywhere else. */
+  font-family: "Times New Roman", var(--font-tinos), Times, serif;
+}
+
+::selection {
+  background: #e6e3d8;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 1.5px solid var(--ink);
+  outline-offset: 3px;
 }
 
 @keyframes reveal {
@@ -43,17 +47,6 @@ body {
   }
 }
 
-::selection {
-  background: #e4d9be;
-}
-
-a:focus-visible,
-button:focus-visible,
-summary:focus-visible {
-  outline: 1.5px solid var(--rubric);
-  outline-offset: 3px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
@@ -61,44 +54,41 @@ summary:focus-visible {
   }
 }
 
-/* The basemap is warmed toward the paper so it sits on the page as a printed
-   plate rather than a live web map. Only the tiles are filtered; pins keep
-   their true colour. */
+/* Map: desaturated and lightly warmed so it sits on the off-white ground
+   instead of glowing against it. */
 .leaflet-container {
-  background: var(--paper);
+  background: var(--bg);
   font-family: inherit;
 }
 
 .leaflet-tile-pane {
-  /* Desaturate first, then tint: OSM's greens and yellows would otherwise
-     fight the paper. The result reads as one ink on one stock. */
-  filter: grayscale(1) sepia(0.46) saturate(0.9) brightness(0.99) contrast(1.04);
+  filter: grayscale(1) sepia(0.16) brightness(1.02) contrast(1.02);
 }
 
 .leaflet-control-attribution {
-  background: rgba(242, 236, 221, 0.85) !important;
-  color: var(--ink-soft);
+  background: rgba(248, 247, 243, 0.88) !important;
+  color: var(--muted);
   font-size: 0.72rem;
 }
 
 .leaflet-control-attribution a {
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .leaflet-bar a {
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
   border-bottom-color: var(--rule);
 }
 
 .leaflet-bar a:hover {
-  background: #e9e0cb;
+  background: #eeece4;
 }
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
   border-radius: 2px;
-  box-shadow: 0 1px 6px rgba(43, 36, 25, 0.18);
+  box-shadow: 0 1px 6px rgba(25, 25, 23, 0.16);
 }

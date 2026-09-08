@@ -1,53 +1,35 @@
-import Disclosure from "@/components/Disclosure";
-import Heading from "@/components/Heading";
-import Prose from "@/components/Prose";
-import { LINKS, experience } from "@/content";
+import { LINKS } from "@/content";
 
-export default function Main() {
+const INTERESTS = [
+  "inference engineering",
+  "machine learning",
+  "cooking",
+  "basketball",
+];
+
+export default function Home() {
   return (
-    <>
-      <h1 className="text-[2.15rem] leading-[1.25]">Doyoon (Daniel) Kim</h1>
+    <div className="flex flex-1 flex-col items-center justify-center pb-16 text-center">
+      <h1 className="text-[2.4rem] leading-tight">Doyoon (Daniel) Kim</h1>
+      <p className="mt-2 text-[1.05rem] text-muted">UChicago CS</p>
 
-      <div className="mt-5 space-y-1 text-ink/90">
-        <p>University of Chicago</p>
-        <p className="text-ink-soft">
-          B.S. Computer Science and B.S. Statistics, expected 2029
-        </p>
-        <p className="text-ink-soft">
-          Previously computational biology at UCLA
-        </p>
-      </div>
+      <p className="mt-7 flex justify-center gap-x-7">
+        {LINKS.filter((link) => link.label !== "Email").map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            className="underline underline-offset-[5px] transition-colors duration-150 hover:text-muted"
+          >
+            {link.label}
+          </a>
+        ))}
+      </p>
 
-      <section className="mt-12">
-        <Heading>Experience</Heading>
-        <div>
-          {experience.entries.map((entry) => (
-            <Disclosure
-              key={entry.title}
-              title={entry.title}
-              meta={entry.meta}
-              when={entry.when}
-            >
-              <Prose lines={entry.bullets} />
-            </Disclosure>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-12">
-        <Heading>Elsewhere</Heading>
-        <div className="flex flex-wrap gap-x-8 gap-y-2">
-          {LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-rubric underline decoration-rubric/30 underline-offset-[5px] transition-colors duration-150 hover:decoration-rubric"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </section>
-    </>
+      <ul className="mt-10 space-y-1 text-[1.02rem] text-muted">
+        {INTERESTS.map((interest) => (
+          <li key={interest}>{interest}</li>
+        ))}
+      </ul>
+    </div>
   );
 }

@@ -21,7 +21,7 @@ export default function Disclosure({
   const id = useId();
 
   return (
-    <div className="border-b border-rule/70 py-4 first:pt-0">
+    <div className="border-b border-rule py-4 first:pt-0">
       <button
         type="button"
         aria-expanded={open}
@@ -31,7 +31,7 @@ export default function Disclosure({
       >
         <span
           aria-hidden
-          className={`mt-[0.1em] shrink-0 text-[0.7rem] text-rubric transition-transform duration-200 ${
+          className={`mt-[0.1em] shrink-0 text-[0.7rem] text-ink transition-transform duration-200 ${
             open ? "rotate-90" : ""
           }`}
         >
@@ -41,10 +41,10 @@ export default function Disclosure({
           <span className="underline decoration-transparent underline-offset-[5px] transition-colors duration-150 group-hover:decoration-ink/30">
             {title}
           </span>
-          {meta && <span className="block italic text-ink-soft">{meta}</span>}
+          {meta && <span className="block italic text-muted">{meta}</span>}
         </span>
         {when && (
-          <span className="shrink-0 text-[0.92rem] text-ink-soft">{when}</span>
+          <span className="shrink-0 text-[0.92rem] text-muted">{when}</span>
         )}
       </button>
 

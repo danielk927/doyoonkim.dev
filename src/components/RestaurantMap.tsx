@@ -5,8 +5,8 @@ import "leaflet/dist/leaflet.css";
 import { DEFAULT_VIEW, type Restaurant } from "@/content/restaurants";
 
 /**
- * Every restaurant as a plate in the book: a muted basemap warmed toward the
- * paper, with the pins in rubric red. Leaflet is loaded on the client only.
+ * Every restaurant on one map: a desaturated basemap tuned to sit on the
+ * off-white ground. Leaflet is loaded on the client only.
  */
 export default function RestaurantMap({ places }: { places: Restaurant[] }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -36,9 +36,9 @@ export default function RestaurantMap({ places }: { places: Restaurant[] }) {
       const markers = places.map((place) => {
         const marker = L.circleMarker([place.lat, place.lng], {
           radius: 5,
-          color: "#7a2e26",
+          color: "#191917",
           weight: 1.5,
-          fillColor: "#7a2e26",
+          fillColor: "#191917",
           fillOpacity: 0.65,
         }).addTo(map!);
         const score =
@@ -68,7 +68,7 @@ export default function RestaurantMap({ places }: { places: Restaurant[] }) {
       ref={ref}
       role="application"
       aria-label="Map of restaurants visited"
-      className="h-[24rem] w-full border border-rule bg-paper sm:h-[30rem]"
+      className="h-[24rem] w-full border border-rule bg-bg sm:h-[30rem]"
     />
   );
 }

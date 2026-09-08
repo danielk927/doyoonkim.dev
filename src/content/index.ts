@@ -4,5 +4,5 @@ export { experience } from "./experience";
 export { projects } from "./projects";
 export { notes, type Note } from "./notes";
 export { restaurants, type Restaurant } from "./restaurants";
-export { PAGES, folioFor } from "./pages";
+export { PAGES } from "./pages";
 export type { Section, Entry } from "./types";
