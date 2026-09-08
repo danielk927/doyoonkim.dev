@@ -1,15 +1,10 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 /**
- * Way back to the front page. Absolutely positioned so it can never move the
- * nav, and hidden on the front page itself where it would lead nowhere.
+ * Way back to the front page. Absolutely positioned so it takes no layout
+ * space and can never move the nav.
  */
 export default function HomeLogo() {
-  if (usePathname() === "/") return null;
-
   return (
     <Link
       href="/"
