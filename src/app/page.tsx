@@ -1,34 +1,24 @@
 import { LINKS } from "@/content";
 
-const INTERESTS = [
-  "inference engineering",
-  "machine learning",
-  "cooking",
-  "basketball",
-];
-
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center pb-20 text-center">
-      <h1 className="whitespace-nowrap text-[clamp(1.75rem,6.2vw,5rem)] leading-[1.1]">
-        Doyoon (Daniel) Kim
-      </h1>
+    /* Pinned to the viewport, not to `main`, so the name sits on the exact
+       centre line regardless of how tall the nav above it is. The wrapper
+       ignores pointer events so the nav stays clickable through it. */
+    <div className="pointer-events-none fixed inset-0 flex items-center justify-center px-6">
+      <div className="pointer-events-auto relative text-center">
+        <h1 className="whitespace-nowrap text-[clamp(1.75rem,6.2vw,5rem)] leading-[1.1]">
+          Doyoon (Daniel) Kim
+        </h1>
 
-      <p className="mt-1 flex justify-center gap-x-4 text-[1.05rem]">
-        {LINKS.filter((link) => link.label !== "Email").map((link) => (
-          <a key={link.label} href={link.href} className="underline">
-            {link.label}
-          </a>
-        ))}
-      </p>
-
-      <p className="mt-6 text-[1.05rem] text-muted">UChicago CS</p>
-
-      <ul className="mt-6 space-y-0.5 text-[1.05rem] text-muted">
-        {INTERESTS.map((interest) => (
-          <li key={interest}>{interest}</li>
-        ))}
-      </ul>
+        <p className="absolute inset-x-0 top-full mt-1 flex justify-center gap-x-4 text-[1.05rem]">
+          {LINKS.filter((link) => link.label !== "Email").map((link) => (
+            <a key={link.label} href={link.href} className="underline">
+              {link.label}
+            </a>
+          ))}
+        </p>
+      </div>
     </div>
   );
 }

@@ -25,7 +25,7 @@ export const notes: Note[] = [
   {
     title: "Away from a screen",
     body: [
-      "Mahjong, kendo, golf, running. Cooking and baking, which is most of why the food page exists. Watching the NBA. Clothes.",
+      "Mahjong, kendo, golf, running. Cooking and baking. Watching the NBA. Clothes.",
     ],
   },
 ];
