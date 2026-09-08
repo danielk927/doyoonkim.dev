@@ -235,6 +235,9 @@ C = {
     "cream":   (0xf0, 0xe2, 0xc8), "creamSh": (0xcd, 0xbd, 0xa2),
     "roof":    (0x3f, 0x7a, 0x63), "roofSh":  (0x2e, 0x5c, 0x4a),
     "gold":    (0xe8, 0xb5, 0x4a),
+    "bronze":  (0x93, 0x84, 0x63), "bronzeSh": (0x6a, 0x5e, 0x46),
+    "bronzeLt":(0xb2, 0xa4, 0x80),
+    "stone":   (0xc9, 0xc3, 0xb5), "stoneSh": (0x9d, 0x97, 0x89),
     "neonR":   (0xe0, 0x4a, 0x4a), "neonC": (0x46, 0xc8, 0xd8),
     "dark":    (0x3a, 0x33, 0x3e),
 }
@@ -242,6 +245,14 @@ C = {
 
 def _cell():
     return Image.new("RGBA", (LM_W, LM_H), (0, 0, 0, 0))
+
+
+def _door(d):
+    """Street-level entrance, always on tile column 3 so the map can put the
+    landmark marker at a predictable offset."""
+    d.rectangle([48, 108, 62, 127], fill=C["dark"])
+    d.rectangle([50, 112, 60, 127], fill=C["gold"])
+    d.rectangle([53, 116, 57, 127], fill=C["dark"])
 
 
 def bank_of_china():
@@ -266,6 +277,7 @@ def bank_of_china():
             d.polygon([(x0, y1), (x1, y1), (mid, y1 - 12)], fill=C["white"])
     for mx, top in ((40, 2), (56, 10)):
         d.line([(mx, 22), (mx, top)], fill=C["greySh"])
+    _door(d)
     return im
 
 
@@ -282,6 +294,7 @@ def icc_tower():
     d.rectangle([30, 14, 66, 22], fill=C["white"])
     for x in range(32, 66, 6):
         d.line([(x, 14), (x, 4)], fill=C["grey"])
+    _door(d)
     return im
 
 
@@ -303,26 +316,45 @@ def clock_tower():
     for y in (86, 106):
         d.rectangle([40, y, 46, y + 10], fill=C["glassSh"])
         d.rectangle([52, y, 58, y + 10], fill=C["glassSh"])
+    _door(d)
     return im
 
 
-def hku_main():
-    """Colonial arcade, columns, central dome."""
+def tian_tan_buddha():
+    """The Big Buddha on Lantau: stairway, tiered podium, lotus throne.
+    The door is real -- there is an exhibition hall inside the base."""
     im = _cell()
     d = ImageDraw.Draw(im)
-    d.rectangle([6, 74, 90, 128], fill=C["brick"])
-    d.rectangle([48, 74, 90, 128], fill=C["brickSh"])
-    for x in range(10, 89, 8):                      # white columns
-        d.rectangle([x, 78, x + 3, 124], fill=C["cream"])
-    for x in range(10, 89, 8):                      # arcade arches
-        d.arc([x - 3, 108, x + 9, 126], 180, 360, fill=C["creamSh"])
-    d.rectangle([4, 70, 92, 76], fill=C["cream"])
-    d.rectangle([38, 34, 58, 74], fill=C["brick"])
-    d.rectangle([49, 34, 58, 74], fill=C["brickSh"])
-    d.rectangle([36, 30, 60, 36], fill=C["cream"])
-    d.ellipse([38, 42, 56, 60], fill=C["cream"], outline=C["brickSh"])
-    d.chord([36, 12, 60, 36], 180, 360, fill=C["roof"])
-    d.line([(48, 14), (48, 4)], fill=C["gold"])
+
+    d.polygon([(14, 128), (82, 128), (72, 112), (24, 112)], fill=C["stone"])
+    for y in range(114, 128, 3):                       # the 268 steps
+        d.line([(16 + (y - 112) // 2, y), (80 - (y - 112) // 2, y)], fill=C["stoneSh"])
+    for i, (inset, top) in enumerate(((22, 104), (27, 96), (32, 89))):
+        d.rectangle([inset, top, 96 - inset, top + 9], fill=C["stone"])
+        d.rectangle([48, top, 96 - inset, top + 9], fill=C["stoneSh"])
+        d.line([(inset, top), (96 - inset, top)], fill=C["cream"])
+
+    d.ellipse([28, 78, 68, 94], fill=C["bronzeLt"])    # lotus throne
+    for x in range(30, 68, 7):
+        d.arc([x, 78, x + 9, 92], 180, 360, fill=C["bronzeSh"])
+
+    d.polygon([(30, 84), (66, 84), (60, 60), (36, 60)], fill=C["bronze"])
+    d.polygon([(48, 84), (66, 84), (60, 60), (48, 60)], fill=C["bronzeSh"])
+    for y in range(64, 84, 5):                         # robe folds
+        d.line([(37, y), (59, y)], fill=C["bronzeSh"])
+    d.rectangle([40, 46, 56, 62], fill=C["bronze"])    # torso
+    d.rectangle([48, 46, 56, 62], fill=C["bronzeSh"])
+    d.polygon([(56, 60), (66, 52), (68, 44), (62, 44), (58, 52)], fill=C["bronze"])
+    d.ellipse([60, 38, 70, 48], fill=C["bronzeLt"])    # raised right hand
+    d.polygon([(40, 62), (30, 68), (28, 76), (36, 74)], fill=C["bronze"])
+
+    d.ellipse([39, 26, 57, 46], fill=C["bronzeLt"])    # head
+    d.ellipse([48, 26, 57, 46], fill=C["bronze"])
+    d.ellipse([44, 20, 52, 30], fill=C["bronzeLt"])    # ushnisha
+    d.line([(43, 35), (46, 35)], fill=C["bronzeSh"])
+    d.line([(50, 35), (53, 35)], fill=C["bronzeSh"])
+
+    _door(d)
     return im
 
 
@@ -345,12 +377,13 @@ def neon_tong_lau():
         d.rectangle([x0 + 2, y0 + 2, x0 + 8, y0 + 28], outline=C["white"])
         for yy in range(y0 + 6, y0 + 28, 7):
             d.line([(x0 + 3, yy), (x0 + 7, yy)], fill=C["white"])
+    _door(d)
     return im
 
 
 LANDMARK_SPRITES = [
     ("experience", bank_of_china),
-    ("education", hku_main),
+    ("education", tian_tan_buddha),
     ("projects", icc_tower),
     ("about", clock_tower),
     ("notes", neon_tong_lau),

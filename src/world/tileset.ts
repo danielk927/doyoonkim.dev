@@ -97,11 +97,14 @@ export const LEGEND: Record<string, TileDef> = {
   x: block(T.doorOrangeTop),
   y: block(T.doorGreyTop),
 
-  "1": block(T.doorGreyFoot),
-  "2": block(T.doorGreenFoot),
-  "3": block(T.doorOrangeFoot),
-  "4": block(T.doorBrownFoot),
-  "5": block(T.doorGreenFoot),
+  // Landmark plots are covered by a sprite from landmarks.png, so the tile
+  // underneath is plain pavement -- only its solidity matters.
+  X: block(T.pavement),
+  "1": block(T.pavement),
+  "2": block(T.pavement),
+  "3": block(T.pavement),
+  "4": block(T.pavement),
+  "5": block(T.pavement),
 };
 
 export const LANDMARKS: Record<string, string> = {

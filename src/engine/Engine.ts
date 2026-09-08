@@ -5,6 +5,7 @@ import { landmarkAt, parseMap } from "./mapParser";
 import { Renderer, type Assets } from "./renderer";
 import type { MapSource, ParsedMap } from "./types";
 import { SCALE, TILE } from "@/world/tileset";
+import { STRUCT_H } from "@/world/structures";
 
 /** Simulation step. Fixed so speed does not vary with refresh rate. */
 const STEP_MS = 1000 / 60;
@@ -169,7 +170,7 @@ export class Engine {
       if (!label) continue;
       const w = ctx.measureText(label).width + 8;
       const x = l.x * TILE + TILE / 2 - w / 2;
-      const y = l.y * TILE - 14;
+      const y = (l.y + 1 - STRUCT_H) * TILE - 14;
       ctx.fillStyle = "#f8f4e6";
       ctx.fillRect(x, y, w, 11);
       ctx.fillStyle = "#3b4a63";
@@ -191,9 +192,10 @@ export async function loadAssets(): Promise<Assets> {
       img.onerror = () => reject(new Error(`failed to load ${src}`));
       img.src = src;
     });
-  const [sheet, character] = await Promise.all([
+  const [sheet, character, landmarks] = await Promise.all([
     load("/assets/tileset.png"),
     load("/assets/character.png"),
+    load("/assets/landmarks.png"),
   ]);
-  return { sheet, character };
+  return { sheet, character, landmarks };
 }

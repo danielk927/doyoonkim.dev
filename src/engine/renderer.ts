@@ -2,6 +2,7 @@ import type { MoveState } from "./grid";
 import { renderOffset } from "./grid";
 import type { ParsedMap } from "./types";
 import { FOAM, SHEET_COLS, TILE, WATER_TILES } from "@/world/tileset";
+import { DOOR_COL, STRUCTURES, STRUCT_H, STRUCT_W, type Structure } from "@/world/structures";
 
 const CH_W = 16;
 const CH_H = 20;
@@ -10,14 +11,32 @@ const DIR_ROW = { down: 0, right: 1, up: 2, left: 3 } as const;
 export interface Assets {
   sheet: HTMLImageElement;
   character: HTMLImageElement;
+  landmarks: HTMLImageElement;
 }
 
 export class Renderer {
+  /** Structures indexed by the row they stand on, so they draw in row order. */
+  private byRow = new Map<number, Structure[]>();
+
   constructor(
     private ctx: CanvasRenderingContext2D,
     private assets: Assets,
     private map: ParsedMap,
-  ) {}
+  ) {
+    for (const s of STRUCTURES) {
+      const list = this.byRow.get(s.bottom) ?? [];
+      list.push(s);
+      this.byRow.set(s.bottom, list);
+    }
+  }
+
+  private drawStructure(s: Structure) {
+    this.ctx.drawImage(
+      this.assets.landmarks,
+      s.sprite * STRUCT_W * TILE, 0, STRUCT_W * TILE, STRUCT_H * TILE,
+      s.x * TILE, (s.bottom + 1 - STRUCT_H) * TILE, STRUCT_W * TILE, STRUCT_H * TILE,
+    );
+  }
 
   private blit(index: number, x: number, y: number) {
     const sx = (index % SHEET_COLS) * TILE;
@@ -68,6 +87,7 @@ export class Renderer {
         const o = map.overlay[y][x];
         if (o !== null) this.blit(o, x * TILE, y * TILE);
       }
+      for (const s of this.byRow.get(y) ?? []) this.drawStructure(s);
       // The player is drawn between overlay rows so tall props in front of it
       // occlude correctly, the way they do in a 3/4 top-down game.
       if (y === player.y) this.drawPlayer(px, py, player, stepCount);
